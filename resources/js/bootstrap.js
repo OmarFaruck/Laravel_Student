@@ -1,4 +1,9 @@
 import axios from 'axios';
-window.axios = axios;
+// import { Inertia } from '@inertiajs/inertia';
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+// Set base URL for API (adjust if your API is at /api)
+axios.defaults.baseURL = '/api';
+
+export default axios;
