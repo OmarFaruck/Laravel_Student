@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
 {
@@ -22,7 +23,21 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        
+            $validator = Validator::make($data, [
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:students,email', // FIXED
+        'address' => 'nullable|string',
+        'image' => 'nullable|image|max:2048',
+    ]);
+    if ($validator->fails) {
+        return response()->json(['errors'=>$validator->errors()], 422);
+    }
+
+    $customer=Customer::create($data);
+    return response()->json($customer,201);
+
     }
 
     /**
@@ -30,7 +45,12 @@ class CustomerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $customer=Customer::find($id);
+        if (!$customer) {
+            return response()->json(['message' => 'Customer not found'], 404);
+
+        }
+        return response()->json($customer, 200);
     }
 
     /**
@@ -38,7 +58,7 @@ class CustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
     }
 
     /**

@@ -5,8 +5,8 @@
                 <h2>Return Page</h2>
             </a>
             <h2>Customer Pages</h2>
-            <!-- <button class="btn btn-primary" @click="openCreate"> -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Add Customer
             </button>
         </div>
@@ -14,62 +14,99 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">name</th>
-                    <th scope="col">email</th>
-                    <th scope="col">address</th>
-                    <th scope="col">action</th>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+
+            <tbody v-if="customers && customers.length">
+                <tr v-for="customer in customers" :key="customer.id">
+                    <td>{{ customer.id }}</td>
+                    <td>
+                        <img v-if="customer.image" :src="imgUrl(customer.image)" width="50" height="50"
+                            style="object-fit:cover; border-radius:10px;">
+                    </td>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.address }}</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <!-- ------Form Modal start------- -->
-     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Customer</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Name:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Input Name">
-          </div>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Email:</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Input Email">
-          </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label">Address:</label>
-            <textarea class="form-control" id="message-text" placeholder="Input Address"></textarea>
-          </div>
-              <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Image:</label>
-            <input type="file" class="form-control" id="recipient-name" placeholder="Input Image">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer"> 
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form @submit.prevent="submit">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Customer</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label>Name:</label>
+                            <input v-model="form.name" type="text" class="form-control">
+                            <div class="text-danger" v-if="form.errors.name">{{ form.errors.name }}</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Email:</label>
+                            <input v-model="form.email" type="text" class="form-control">
+                            <div class="text-danger" v-if="form.errors.email">{{ form.errors.email }}</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Address:</label>
+                            <input v-model="form.address" type="text" class="form-control">
+                            <div class="text-danger" v-if="form.errors.address">{{ form.errors.address }}</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Image:</label>
+                            <input type="file" @change="uploadImage" class="form-control">
+                            <div class="text-danger" v-if="form.errors.image">{{ form.errors.image }}</div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-    <!-- ------Form Modal end--------- -->
 </template>
 
-<script>
+<script setup>
+import { useForm } from '@inertiajs/vue3';
 
+// Receive customers from Laravel
+defineProps({
+    customers: Array
+});
+
+// Inertia form
+const form = useForm({
+    name: "",
+    email: "",
+    address: "",
+    image: null
+});
+
+function uploadImage(e) {
+    form.image = e.target.files[0];
+}
+
+function submit() {
+    form.post("/customer");
+}
+
+function imgUrl(image) {
+    return `/storage/${image}`;
+}
 </script>
