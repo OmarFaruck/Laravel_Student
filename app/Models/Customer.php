@@ -14,4 +14,6 @@ class Customer extends Model
     {
         return $this->image ? Storage::url($this->image) : null;
     }
+
+    protected $appends = ['image_url'];
 }
