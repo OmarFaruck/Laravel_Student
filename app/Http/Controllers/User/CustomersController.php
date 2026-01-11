@@ -7,17 +7,17 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CustomerController extends Controller
+class CustomersController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $customer=Customer::all();
-        return Inertia::render('Customer/Customer',[ 
-            'customers'=>$customer
-        ]);
+        //    $customer=Customer::all();
+       return Inertia::render('Customer/Customer', [
+    'customers' => Customer::all()
+]);
     }
 
     /**
@@ -33,7 +33,6 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-         
          $data = $request->validate([
         'name' => 'required',
         'email' => 'required|email|unique:customers,email',
@@ -54,7 +53,7 @@ class CustomerController extends Controller
 
     ]);
 
-    return redirect()->route('Customer.index')
+    return redirect()->route('customer.index') 
         ->with('success', 'Customer added successfully!');
     }
 
@@ -87,6 +86,11 @@ class CustomerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+     
+        $customer = Customer::findorFail($id);
+        $customer->delete();
+        
+        return redirect()->route('customer.index')->with('success', 'Customer deleted Suscessfully');
+
     }
 }

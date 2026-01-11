@@ -16,7 +16,7 @@
             </button>
         </div>
 
-        <table class="table table-striped table-hover">
+        <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -45,7 +45,13 @@
                     <td>{{ customer.address }}</td>
                     <td>
                         <button class="btn btn-outline-success me-2"><SquarePen /> Edit</button>
-                        <button class="btn btn-outline-danger"><Trash2 /> Delete</button>
+                        <!-- <button class="btn btn-outline-danger"><Trash2 /> Delete</button> -->
+                          <button
+                            class="btn btn-sm btn-danger"
+                            @click="remove(customer)"
+                        >
+                           <Trash2 /> Delete
+                        </button>
 
                     </td>
                      
@@ -128,7 +134,7 @@
 </template>
 
 <script setup>
-import { useForm } from "@inertiajs/vue3";
+import { useForm,router  } from "@inertiajs/vue3";
 import { Trash2,SquarePen } from 'lucide-vue-next';
 // Receive customers from Laravel
 defineProps({
@@ -148,10 +154,32 @@ function uploadImage(e) {
 }
 
 function submit() {
-    form.post("/customer");
+    form.post("/customers", {
+        onSuccess: () => {
+
+            form.reset();
+
+            // close model
+            const modalEl= document.getElementById('exampleModel');
+            const model= bootstrap.Modal.getInstance(modalEl);
+            model.hide();
+
+        }
+    });
 }
 
 function imgUrl(image) {
     return `/storage/${image}`;
+}
+
+// delete function
+function remove(customer) {
+    if (confirm("Are you sure want to delete?")) {
+        router.delete(`/customers/${customer.id}`, {
+            onSuccess: () => {
+                console.log("Deleted Successfully");
+            }
+        });
+    }
 }
 </script>
