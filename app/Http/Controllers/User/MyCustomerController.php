@@ -7,17 +7,16 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CustomersController extends Controller
+class MyCustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //    $customer=Customer::all();
-       return Inertia::render('Customer/Customer', [
-    'customers' => Customer::all()
-]);
+        return Inertia::render('Customer/Customer', [
+          'customers' => Customer::all()
+    ]);
     }
 
     /**
@@ -25,7 +24,7 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Customer/create');
+         return Inertia::render('Customer/create');
     }
 
     /**
@@ -53,7 +52,7 @@ class CustomersController extends Controller
 
     ]);
 
-    return redirect()->route('customer.index') 
+    return redirect()->route('customers.index') 
         ->with('success', 'Customer added successfully!');
     }
 
@@ -70,7 +69,10 @@ class CustomersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $customer = Customer::findorFail($id);
+        return Inertia::render('Customer/edit', [
+            'customer' => $customer
+            ]);
     }
 
     /**
@@ -78,19 +80,35 @@ class CustomersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+         $customer = Customer::findOrFail($id);
+
+    $data = $request->validate([
+        'name' => 'required',
+        'email' => "required|email|unique:customers,email,$id",
+        'address' => 'required',
+        'image' => 'nullable|image',
+    ]);
+
+    if ($request->hasFile('image')) {
+        $data['image'] = $request->file('image')->store('customers','public');
     }
+
+    $customer->update($data);
+
+    return redirect()->route('customers.index')
+    ->with('success','Customer Updated Successfully');
+}
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-     
-        $customer = Customer::findorFail($id);
-        $customer->delete();
-        
-        return redirect()->route('customer.index')->with('success', 'Customer deleted Suscessfully');
+          $customer = Customer::findOrFail($id);
+    $customer->delete();
 
+    return redirect()->route('customers.index')
+        ->with('success', 'Customer deleted successfully');
     }
 }
