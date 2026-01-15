@@ -243,12 +243,19 @@ function uploadImage(e) {
 
 // from submit function
 function submitCreate() {
+    //customers route এ POST request 
     form.post("/customers", {
+        // insert data
         onSuccess: () => {
-            form.reset();
 
+            // Form এর সব input ফাঁকা করে দেয়
+            form.reset();
+            
+            //   HTML এর এই modal টা ধরছে:
             const modalEl = document.getElementById("exampleModal");
             const modal = Modal.getInstance(modalEl) || new Modal(modalEl);
+
+            // Modal বন্ধ করা
             modal.hide();
 
             // 🔥 Force remove modal overlay + body lock
