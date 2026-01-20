@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->text('address')->nullable();
+            $table->string('image')->nullable(); // stores path in storage/app/public/...
             $table->timestamps();
         });
     }

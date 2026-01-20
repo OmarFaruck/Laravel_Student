@@ -2,6 +2,7 @@
 
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\ShopController;
 use App\Http\Controllers\User\CustomersController;
 use App\Http\Controllers\User\MyCustomerController;
 
@@ -17,12 +18,12 @@ Route::get('/student', function () {
 
 // Route::resource('/customer', CustomerController::class);
 
-// Route::get('/customers', [CustomersController::class, 'index'])->name('customers.index');
-// Route::get('/customers/create', [CustomersController::class, 'create'])->name('customers.create');
-// Route::post('/customers', [CustomersController::class, 'store'])->name('customers.store');
-// Route::get('/customers/{id}/edit', [CustomersController::class, 'edit'])->name('customers.edit');
-// Route::put('/customers/{id}', [CustomersController::class, 'update'])->name('customers.update');
-// Route::delete('/customers/{id}', [CustomersController::class, 'destroy'])->name('customers.delete');
+Route::get('/shops', [ShopController::class, 'index'])->name('shops.index');
+Route::get('/shops/create', [ShopController::class, 'create'])->name('shops.create');
+Route::post('/shops', [ShopController::class, 'store'])->name('shops.store');
+Route::get('/shops/{id}/edit', [ShopController::class, 'edit'])->name('shops.edit');
+Route::put('/shops/{id}', [ShopController::class, 'update'])->name('shops.update');
+Route::delete('/shops/{id}', [ShopController::class, 'destroy'])->name('shops.destroy');
 
 
 Route::get('/customers', [MyCustomerController::class, 'index'])->name('customers.index');

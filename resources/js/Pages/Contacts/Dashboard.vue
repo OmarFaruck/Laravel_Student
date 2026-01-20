@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex align-items-center text-centre justify-content-center">
         <a
-            href="/shop"
+            href="/shops"
             class="btn btn-outline-info"
             style="text-decoration: none; margin-right: 15px"
         >

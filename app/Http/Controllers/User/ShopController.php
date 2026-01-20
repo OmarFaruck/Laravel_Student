@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
+ 
+ use Inertia\Inertia;
+use App\Models\Shop;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ShopController extends Controller
 {
@@ -11,8 +14,10 @@ class ShopController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    { 
+        return Inertia::render('Shop/Shop',[
+            'shops' => Shop::all()
+        ]);
     }
 
     /**
@@ -20,7 +25,7 @@ class ShopController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Shop/Create');
     }
 
     /**
@@ -28,7 +33,27 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:shops,email',
+            'address' => 'required',
+            'image' => 'nullable|image',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('shops', 'public');
+        }
+
+        Shop::create([
+            'name'=>$data['name'],
+            'email'=>$data['email'],
+            'address'=>$data['address'],
+            'image'=>$data['image'] ?? null,
+    
+        ]);
+
+        return redirect()->route('shops.index') 
+            ->with('success', 'Shop added successfully!');
     }
 
     /**
@@ -44,7 +69,10 @@ class ShopController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $shop = Shop::findOrFail($id);
+        return Inertia::render('Shop/edit', [
+            'shop' => $shop
+        ]);
     }
 
     /**
@@ -52,7 +80,23 @@ class ShopController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $shop = Shop::findOrFail($id);
+
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:shops,email,'.$id,
+            'address' => 'required',
+            'image' => 'nullable|image',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('shops', 'public');
+        }
+
+        $shop->update($data);
+ 
+        return redirect()->route('shops.index') 
+            ->with('success', 'Shop updated successfully!');
     }
 
     /**
@@ -60,6 +104,10 @@ class ShopController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $shop = Shop::findOrFail($id);
+        $shop->delete();
+
+        return redirect()->route('shops.index')
+            ->with('success', 'Shop deleted successfully!');
     }
 }
