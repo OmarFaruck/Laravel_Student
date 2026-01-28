@@ -3,6 +3,8 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\ShopController;
+use App\Http\Controllers\User\AdminController;
+use App\Http\Controllers\User\SocialController;
 use App\Http\Controllers\User\CustomersController;
 use App\Http\Controllers\User\MyCustomerController;
 
@@ -32,6 +34,20 @@ Route::post('/customers', [MyCustomerController::class, 'store'])->name('custome
 Route::get('/customers/{id}/edit', [MyCustomerController::class, 'edit'])->name('customers.edit');
 Route::put('/customers/{id}', [MyCustomerController::class, 'update'])->name('customers.update');
 Route::delete('/customers/{id}', [MyCustomerController::class, 'destroy'])->name('customers.destroy');
+
+
+Route::get('/admins', [AdminController::class, 'index'])->name('admins.index');
+Route::get('/admins/create', [AdminController::class, 'create'])->name('admins.create');
+Route::post('/admins', [AdminController::class, 'store'])->name('admins.store');
+Route::get('/admins/{id}/edit', [AdminController::class, 'edit'])->name('admins.edit');
+Route::put('/admins/{id}', [AdminController::class, 'update'])->name('admins.update');
+Route::delete('/admins/{id}', [AdminController::class, 'destroy'])->name('admins.destroy');
+
+
+//social controller 
+Route::get('auth/{provider}', [SocialController::class, 'redirect'])->name('socialite.redirect');
+Route::get('auth/{provider}/callback', [SocialController::class, 'callback'])->name('socialite.callback');
+
 // Route::get('/', function () {
 //     return dd('hellow world');
 // });

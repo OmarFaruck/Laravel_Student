@@ -4,6 +4,7 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import './bootstrap';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+ 
 
 createInertiaApp({
     resolve: name => {
@@ -12,7 +13,8 @@ createInertiaApp({
     },
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
-            .use(plugin)
+            .use(plugin) 
             .mount(el)
+            
     },
 })
