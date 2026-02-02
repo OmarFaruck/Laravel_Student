@@ -9,6 +9,7 @@
             <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Add Admin Page
             </button>
+            
         </div>
 
         <table class="table table-bordered table-striped table-hover">
@@ -42,8 +43,14 @@
                         </button>
                     </td>
                 </tr>
+              
             </tbody>
+            
         </table>
+
+           <div class="mx-start">
+                <a href="/logout_page" class="btn btn-outline-danger"> <KeySquare /> Logout_Page</a>
+            </div>
     </div>
 
     <!-- input From Page -->

@@ -29,14 +29,20 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <!-- <a :href="route('socialite.redirect', 'github')" class="btn btn-outline-success"> -->
                 <a href="/auth/github" class="btn btn-outline-success">
                   
-                    <Github />
+                    <Github /> 
                 </a>
             </div>
-            <div class="col-lg-6">aaaaaaaaa</div>
+            <div class="col-lg-4">
+                <a href="/register_page" class="btn btn-outline-primary">Register_Page</a>
+            </div>
+
+            <div class="col-lg-4">
+                <a href="/logout_page" class="btn btn-outline-danger"> <KeySquare /> Logout_Page</a>
+            </div>
         </div>
 
 
@@ -45,5 +51,6 @@
 </template>
 
 <script setup>
-import { Github } from 'lucide-vue-next';
+import { Github, KeySquare } from 'lucide-vue-next';
+import { Link } from '@inertiajs/vue3';
 </script>

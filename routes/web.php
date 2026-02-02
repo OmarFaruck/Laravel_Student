@@ -3,8 +3,9 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\ShopController;
-use App\Http\Controllers\User\AdminController;
-use App\Http\Controllers\User\SocialController;
+use App\Http\Controllers\Admin\SocialController;
+use App\Http\Controllers\User\AdminController;  
+use App\Http\Controllers\Admin\RegisterController;
 use App\Http\Controllers\User\CustomersController;
 use App\Http\Controllers\User\MyCustomerController;
 
@@ -44,9 +45,19 @@ Route::put('/admins/{id}', [AdminController::class, 'update'])->name('admins.upd
 Route::delete('/admins/{id}', [AdminController::class, 'destroy'])->name('admins.destroy');
 
 
-//social controller 
+Route::get('/register_page', [RegisterController::class, 'registerPage'])->name('register.index');
+Route::post('/register_page', [RegisterController::class, 'register'])->name('register.index');
+
+Route::get('/login_page', [RegisterController::class, 'loginPage'])->name('login.index');
+Route::post('/login_page', [RegisterController::class, 'loginPage'])->name('login.index');
+
+//logout route
+Route::get('/logout_page', [RegisterController::class, 'logoutPage'])->name('logout.index'); 
+
+
 Route::get('auth/{provider}', [SocialController::class, 'redirect'])->name('socialite.redirect');
 Route::get('auth/{provider}/callback', [SocialController::class, 'callback'])->name('socialite.callback');
+
 
 // Route::get('/', function () {
 //     return dd('hellow world');
