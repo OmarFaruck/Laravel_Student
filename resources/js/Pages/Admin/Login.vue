@@ -34,10 +34,12 @@
                 <Github /> Login with github
             </button>
             </a>
-           
-            <button class="btn-google">
+           <a href="/auth/google">
+              <button class="btn-google">
                 <Twitter /> Login with Google
             </button>
+           </a>
+          
         </div>
     </div>
 </template>

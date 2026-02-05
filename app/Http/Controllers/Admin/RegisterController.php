@@ -52,6 +52,7 @@ class RegisterController extends Controller
         // Log out the user
         auth()->logout();
 
+        
         // Redirect to the login page or any other desired location
         return redirect()->route('login.index');
     }

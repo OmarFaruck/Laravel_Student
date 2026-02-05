@@ -59,6 +59,10 @@ Route::get('auth/{provider}', [SocialController::class, 'redirect'])->name('soci
 Route::get('auth/{provider}/callback', [SocialController::class, 'callback'])->name('socialite.callback');
 
 
+// Route::get('auth/{provider}', [SocialController::class, 'redirect'])->name('socialite.redirect');
+// Route::get('auth/{provider}/callback', [SocialController::class, 'callback'])->name('socialite.callback');
+
+
 // Route::get('/', function () {
 //     return dd('hellow world');
 // });
