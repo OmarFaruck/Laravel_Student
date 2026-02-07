@@ -1,4 +1,5 @@
 <template>
+  
     <div class="card mt-4 container text-center justify-content-center">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="/">
@@ -157,7 +158,11 @@
 import { useForm } from "@inertiajs/vue3";
 import { SquarePen, Trash2 } from "lucide-vue-next";
 import { Modal } from "bootstrap";
+import DashboardLayout from '@/Layouts/DashboardLayout.vue'
 
+defineOptions({
+    layout: DashboardLayout
+})
 const form = useForm({
     name: "",
     email: "",

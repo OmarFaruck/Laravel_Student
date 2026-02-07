@@ -47,7 +47,15 @@
 <script setup> 
 import { Link, useForm } from '@inertiajs/vue3'
 import { Github, Twitter } from 'lucide-vue-next';
+import DashboardLayout from '@/Layouts/DashboardLayout.vue';
+
+
+
+
 defineProps({ errors: Object }) 
+defineOptions({
+    layout: DashboardLayout
+})
 
 const form = useForm({
     email: '',
@@ -58,7 +66,7 @@ const handleLogin = () => {
     form.post('/login_page', {
         onSuccess: () => {
             // Handle success (e.g., show a success message or redirect)
-            window.location.href = '/admins';
+            window.location.href = '/dashboard'; // Redirect to dashboard on successful login
         },
         onError: () => {
             // Handle error (e.g., show error messages)

@@ -34,9 +34,15 @@
 <script setup> 
 import { Link, useForm } from '@inertiajs/vue3'
 import { Github, Twitter } from 'lucide-vue-next';
+import DashboardLayout from '@/Layouts/DashboardLayout.vue';
+
+
+
 defineProps({ errors: Object })
 
- 
+defineOptions({
+    layout: DashboardLayout
+})
 
 const form = useForm({
     name: '',

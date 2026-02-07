@@ -7,11 +7,23 @@ use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\User\AdminController;  
 use App\Http\Controllers\Admin\RegisterController;
 use App\Http\Controllers\User\CustomersController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\User\MyCustomerController;
 
-Route::get('/', function () {
-    return Inertia::render('Contacts/Dashboard');
-});
+// Route::get('/', function () {
+//     return Inertia::render('Contacts/Dashboard');
+// });
+
+// Route::get('/', function () {
+//     return Inertia::render('Dashboard');
+// });
+
+// Route::get('/shops', function () {
+//      return Inertia::render('Dashboard', [
+//             'shops' => Shop::latest()->get()
+//         ]);
+// });
+
 Route::get('/student', function () {
     return Inertia::render('Contacts/Index');
 });
@@ -20,6 +32,11 @@ Route::get('/student', function () {
 // });
 
 // Route::resource('/customer', CustomerController::class);
+
+// Layout and Dashboard Route
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard.index');
+
 
 Route::get('/shops', [ShopController::class, 'index'])->name('shops.index');
 Route::get('/shops/create', [ShopController::class, 'create'])->name('shops.create');

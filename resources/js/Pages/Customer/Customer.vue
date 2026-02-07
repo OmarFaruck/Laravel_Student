@@ -222,6 +222,12 @@
 import { useForm, router } from "@inertiajs/vue3";
 import { Trash2, SquarePen } from "lucide-vue-next";
 import { Modal } from "bootstrap";
+import DashboardLayout from '@/Layouts/DashboardLayout.vue'
+
+
+defineOptions({
+    layout: DashboardLayout
+})
 // Receive customers from Laravel
 defineProps({
     customers: Array,

@@ -38,7 +38,8 @@ class RegisterController extends Controller
         // Auth::login($user);
 
         // Redirect to a desired location, e.g., login page or dashboard
-        return redirect()->route('login.index');
+        // return redirect()->route('login.index');
+        return redirect()->route('dashboard.index');
     }
 
     public function loginPage(Request $request)
@@ -54,7 +55,7 @@ class RegisterController extends Controller
 
         
         // Redirect to the login page or any other desired location
-        return redirect()->route('login.index');
+        return redirect()->route('login.index'); 
     }
     
 }

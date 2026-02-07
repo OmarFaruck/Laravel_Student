@@ -18,6 +18,10 @@ class ShopController extends Controller
         return Inertia::render('Shop/Shop',[
             'shops' => Shop::all()
         ]);
+
+    //      return Inertia::render('Dashboard', [
+    //     'shops' => Shop::latest()->get(),
+    // ]);
     }
 
     /**
@@ -52,7 +56,8 @@ class ShopController extends Controller
     
         ]);
 
-        return redirect()->route('shops.index') 
+        // return redirect()->route('shops.index') 
+        return redirect()->route('/') 
             ->with('success', 'Shop added successfully!');
     }
 
@@ -95,7 +100,8 @@ class ShopController extends Controller
 
         $shop->update($data);
  
-        return redirect()->route('shops.index') 
+        // return redirect()->route('shops.index') 
+        return redirect()->route('dashboard.index') 
             ->with('success', 'Shop updated successfully!');
     }
 
