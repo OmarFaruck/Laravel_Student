@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\RegisterController;
 use App\Http\Controllers\User\CustomersController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\User\MyCustomerController;
+use App\Http\Controllers\Admin\RollManagementController;
 
 // Route::get('/', function () {
 //     return Inertia::render('Contacts/Dashboard');
@@ -60,6 +61,10 @@ Route::post('/admins', [AdminController::class, 'store'])->name('admins.store');
 Route::get('/admins/{id}/edit', [AdminController::class, 'edit'])->name('admins.edit');
 Route::put('/admins/{id}', [AdminController::class, 'update'])->name('admins.update');
 Route::delete('/admins/{id}', [AdminController::class, 'destroy'])->name('admins.destroy');
+
+
+Route::get('/rollmanagement', [RollManagementController::class, 'rollmanagement'])->name('roll_management.index');
+
 
 
 Route::get('/register_page', [RegisterController::class, 'registerPage'])->name('register.index');

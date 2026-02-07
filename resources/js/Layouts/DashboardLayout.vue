@@ -30,6 +30,12 @@
         </li>
 
         <li>
+          <Link href="/rollmanagement" class="nav-link text-white">
+           RoleManagement Page
+          </Link>
+        </li>
+
+        <li>
           <Link href="/register_page" class="nav-link text-white">
             Register Page 
           </Link>
@@ -52,7 +58,7 @@
         </button>
 
         <span class="ms-auto fw-bold">
-          {{ $page.props.auth?.user?.name }}
+          {{ $page.props.auth?.user?.name }} | {{ $page.props.auth?.user?.email }}
         </span>
       </nav>
 
