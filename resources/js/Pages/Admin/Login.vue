@@ -66,7 +66,7 @@ const handleLogin = () => {
     form.post('/login_page', {
         onSuccess: () => {
             // Handle success (e.g., show a success message or redirect)
-            window.location.href = '/dashboard'; // Redirect to dashboard on successful login
+            window.location.href = '/'; // Redirect to dashboard on successful login
         },
         onError: () => {
             // Handle error (e.g., show error messages)

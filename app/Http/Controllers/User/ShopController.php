@@ -57,7 +57,7 @@ class ShopController extends Controller
         ]);
 
         // return redirect()->route('shops.index') 
-        return redirect()->route('/') 
+        return redirect()->route('shops.index') 
             ->with('success', 'Shop added successfully!');
     }
 
@@ -101,7 +101,7 @@ class ShopController extends Controller
         $shop->update($data);
  
         // return redirect()->route('shops.index') 
-        return redirect()->route('dashboard.index') 
+        return redirect()->route('shops.index') 
             ->with('success', 'Shop updated successfully!');
     }
 
