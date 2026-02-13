@@ -4,7 +4,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\ShopController;
 use App\Http\Controllers\Admin\SocialController;
-use App\Http\Controllers\User\AdminController;  
+use App\Http\Controllers\User\AdminController;
 use App\Http\Controllers\Admin\RegisterController;
 use App\Http\Controllers\User\CustomersController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -63,7 +63,16 @@ Route::put('/admins/{id}', [AdminController::class, 'update'])->name('admins.upd
 Route::delete('/admins/{id}', [AdminController::class, 'destroy'])->name('admins.destroy');
 
 
+// Route::get('/rollmanagement', [RollManagementController::class, 'rollmanagement'])->name('roll_management.index');
+// Route::get('/rollmanagement/create', [RollManagementController::class, 'create'])->name('roll_management.create');
+// Route::post('/rollmanagement', [RollManagementController::class, 'store'])->name('roll_management.store');
+
 Route::get('/rollmanagement', [RollManagementController::class, 'rollmanagement'])->name('roll_management.index');
+Route::post('/rollmanagement', [RollManagementController::class, 'store'])->name('roll_management.store');
+Route::get('/rollmanagement/{role}/edit', [RollManagementController::class, 'edit'])->name('roll_management.index');
+Route::put('/rollmanagement/{role}', [RollManagementController::class, 'update'])->name('roll_management.update');
+Route::delete('/rollmanagement/{role}', [RollManagementController::class, 'destroy'])->name('roll_management.destroy');
+
 
 
 
@@ -74,7 +83,7 @@ Route::get('/login_page', [RegisterController::class, 'loginPage'])->name('login
 Route::post('/login_page', [RegisterController::class, 'loginPage'])->name('login.index');
 
 //logout route
-Route::get('/logout_page', [RegisterController::class, 'logoutPage'])->name('logout.index'); 
+Route::get('/logout_page', [RegisterController::class, 'logoutPage'])->name('logout.index');
 
 
 Route::get('auth/{provider}', [SocialController::class, 'redirect'])->name('socialite.redirect');

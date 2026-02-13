@@ -6,7 +6,7 @@ use Inertia\Inertia;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Flasher\Toastr\Prime\ToastrInterface;
 class MyCustomerController extends Controller
 {
     /**
@@ -51,8 +51,8 @@ class MyCustomerController extends Controller
         'image'=>$data['image'] ?? null,
 
     ]);
-
-    return redirect()->route('customers.index') 
+ 
+    return redirect()->route('customers.index')
         ->with('success', 'Customer added successfully!');
     }
 
@@ -98,7 +98,7 @@ class MyCustomerController extends Controller
     return redirect()->route('customers.index')
     ->with('success','Customer Updated Successfully');
 }
-    
+
 
     /**
      * Remove the specified resource from storage.

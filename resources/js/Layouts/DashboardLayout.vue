@@ -23,12 +23,18 @@
           </Link>
         </li>
 
-        <li>
+       
+        <li v-if="isAdmin">
           <Link href="/admins" class="nav-link text-white">
             Admin Page Laravel + Vue
           </Link>
         </li>
-
+        <!-- <li>
+          <Link href="/admins" class="nav-link text-white">
+            Admin Page Laravel + Vue
+          </Link>
+        </li> -->
+        
         <li>
           <Link href="/rollmanagement" class="nav-link text-white">
            RoleManagement Page
@@ -37,7 +43,7 @@
 
         <li>
           <Link href="/register_page" class="nav-link text-white">
-            Register Page 
+            Register Page
           </Link>
         </li>
 
@@ -84,10 +90,15 @@
 <script setup>
 import { ref } from 'vue'
 import { Link } from '@inertiajs/vue3'
+ 
+// const isAdmin = page.props.auth.roles?.includes('admins')
 
 const showSidebar = ref(true)
 
 const toggleSidebar = () => {
   showSidebar.value = !showSidebar.value
 }
+
+
+
 </script>

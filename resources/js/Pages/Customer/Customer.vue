@@ -39,7 +39,7 @@
                             height="50"
                             style="object-fit: cover;
                             border-radius: 10px"
-                            
+
                         />
                     </td>
                     <td>{{ customer.name }}</td>
@@ -47,7 +47,7 @@
                     <td>{{ customer.address }}</td>
                     <td>
                         <button
-                            class="btn btn-outline-success me-2" 
+                            class="btn btn-outline-success me-2"
                             @click="edit(customer)"
                         >
                             <SquarePen /> Edit
@@ -241,7 +241,7 @@ const form = useForm({
     address: "",
     image: null,
 });
- 
+
 
 function uploadImage(e) {
     form.image = e.target.files[0];
@@ -249,14 +249,14 @@ function uploadImage(e) {
 
 // from submit function
 function submitCreate() {
-    //customers route এ POST request 
+    //customers route এ POST request
     form.post("/customers", {
         // insert data
         onSuccess: () => {
 
             // Form এর সব input ফাঁকা করে দেয়
             form.reset();
-            
+
             //   HTML এর এই modal টা ধরছে:
             const modalEl = document.getElementById("exampleModal");
             const modal = Modal.getInstance(modalEl) || new Modal(modalEl);
@@ -282,7 +282,7 @@ function edit(customer) {
     form.id = customer.id;
     form.name = customer.name;
     form.email = customer.email;
-    form.address = customer.address; 
+    form.address = customer.address;
     const modalEl = document.getElementById("editModal");
     const modal = Modal.getOrCreateInstance(modalEl);
     modal.show();

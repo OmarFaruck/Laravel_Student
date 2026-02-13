@@ -20,21 +20,21 @@ class UserDatabaseSeeder extends Seeder
             'name' => 'Super Admin',
             'email' => 'superadmin@example.com',
             'password' => Hash::make('password'),
-            'guard_name' => 'web',
+
         ]);
 
         $admin = User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
             'password' => Hash::make('password'),
-            'guard_name' => 'web',
+
         ]);
 
-        //Roll permissions 
+        //Roll permissions
         $role = Role::create(['name' => 'Admin']);
 
         // Assign permissions to the role
-        $permission = Permission::pluck('id')->all(); 
+        $permission = Permission::pluck('id')->all();
         $role->syncPermissions($permission);
 
         // Assign role to users
