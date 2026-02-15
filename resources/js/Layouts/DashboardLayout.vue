@@ -68,17 +68,6 @@
         </span>
       </nav>
 
-      <!-- Flash Message -->
-      <div class="container mt-3">
-        <div v-if="$page.props.flash?.success" class="alert alert-success">
-          {{ $page.props.flash.success }}
-        </div>
-
-        <div v-if="$page.props.flash?.error" class="alert alert-danger">
-          {{ $page.props.flash.error }}
-        </div>
-      </div>
-
       <!-- Page Content -->
       <main class="p-4">
         <slot />
@@ -92,6 +81,15 @@ import { ref } from 'vue'
 import { Link } from '@inertiajs/vue3'
  
 // const isAdmin = page.props.auth.roles?.includes('admins')
+
+import { usePage } from '@inertiajs/vue3'
+ 
+import { useToast } from 'vue-toastification'
+
+const page = usePage()
+const toast = useToast()
+
+ 
 
 const showSidebar = ref(true)
 

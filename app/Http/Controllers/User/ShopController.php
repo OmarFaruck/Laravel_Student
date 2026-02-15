@@ -7,6 +7,9 @@ namespace App\Http\Controllers\User;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Dompdf\Dompdf;
+ use Barryvdh\DomPDF\Facade\Pdf; // ✅ import
+
 
 class ShopController extends Controller
 {
@@ -116,4 +119,25 @@ class ShopController extends Controller
         return redirect()->route('shops.index')
             ->with('success', 'Shop deleted successfully!');
     }
+
+
+    //  public function generatePdf(Request $request)
+    // {
+    //       $data = [
+    //         'title' => 'Sample PDF Document',
+    //         'date' => date('d-m-Y'),
+    //         'items' => [
+    //             ['name' => 'Item 1', 'price' => 100],
+    //             ['name' => 'Item 2', 'price' => 200],
+    //             ['name' => 'Item 3', 'price' => 300],
+    //         ]
+    //     ];
+
+    //     // Load Blade View
+    //     $pdf = Pdf::loadView('pdf.pdf_template', $data);
+
+    //     // Download PDF
+    //     return $pdf->download('invoice.pdf');
+    
+    // }
 }

@@ -1,15 +1,17 @@
 <?php
 
-use Inertia\Inertia;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\User\ShopController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\RegisterController;
+use App\Http\Controllers\Admin\RollManagementController;
 use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\User\AdminController;
-use App\Http\Controllers\Admin\RegisterController;
 use App\Http\Controllers\User\CustomersController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\User\MyCustomerController;
-use App\Http\Controllers\Admin\RollManagementController;
+use App\Http\Controllers\User\PdfController;
+use App\Http\Controllers\User\ShopController;
+use App\Models\Shop;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 // Route::get('/', function () {
 //     return Inertia::render('Contacts/Dashboard');
@@ -88,6 +90,14 @@ Route::get('/logout_page', [RegisterController::class, 'logoutPage'])->name('log
 
 Route::get('auth/{provider}', [SocialController::class, 'redirect'])->name('socialite.redirect');
 Route::get('auth/{provider}/callback', [SocialController::class, 'callback'])->name('socialite.callback');
+
+
+Route::get('/pdf_generate', [PdfController::class, 'generatePdf'])->name('pdf.generate');
+Route::post('/pdf_generate', [PdfController::class, 'generatePdf'])->name('pdf.generate');
+// Route::post('/generate-pdf', [PdfController::class, 'generatePdf']);
+
+
+Route::get('/mail', [PdfController::class, 'mail'])->name('mail');
 
 
 // Route::get('auth/{provider}', [SocialController::class, 'redirect'])->name('socialite.redirect');

@@ -1,5 +1,7 @@
 <template>
-  
+    <button @click="downloadPdf" class="btn btn-primary">
+        Download PDF
+    </button>
     <div class="card mt-4 container text-center justify-content-center">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="/">
@@ -10,6 +12,8 @@
             <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Add Shop Page
             </button>
+
+
         </div>
 
         <table class="table table-bordered table-striped table-hover">
@@ -152,6 +156,7 @@
         </div>
     </div>
 
+
 </template>
 
 <script setup>
@@ -159,6 +164,9 @@ import { useForm } from "@inertiajs/vue3";
 import { SquarePen, Trash2 } from "lucide-vue-next";
 import { Modal } from "bootstrap";
 import DashboardLayout from '@/Layouts/DashboardLayout.vue'
+
+
+
 
 defineOptions({
     layout: DashboardLayout
@@ -255,4 +263,56 @@ function submitupdate() {
 }
 
 
+
+// pdf
+
+async function downloadPdf() {
+    try {
+        const response = await fetch('/pdf_generate');
+
+        if (!response.ok) throw new Error('PDF generation failed');
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'shops.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+    } catch (error) {
+        console.error(error);
+        alert('PDF Failed');
+    }
+}
+
+
+
+// async function downloadPdf() {
+//     try {
+//         const response = await fetch('/pdf_generate', {
+//             method: 'GET',
+            
+//         });
+
+//         if (!response.ok) throw new Error('PDF generation failed');
+
+//         const blob = await response.blob();
+//         const url = window.URL.createObjectURL(blob);
+
+//         const a = document.createElement('a');
+//         a.href = url;
+//         a.download = 'invoice.pdf'; // file name
+//         document.body.appendChild(a);
+//         a.click();
+//         a.remove();
+
+//     } catch (error) {
+//         console.error(error);
+//         alert('Failed to generate PDF');
+//     }
+// }
+ 
 </script>

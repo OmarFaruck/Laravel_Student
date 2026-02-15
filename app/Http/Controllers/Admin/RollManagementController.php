@@ -93,7 +93,7 @@ class RollManagementController extends Controller
 
         $role->syncPermissions($request->permissions ?? []);
 
-        return redirect()->route('roll_management.index')->with('success', 'Role updated successfully!');
+        return redirect()->route('roll_management.index')->with('primary', 'Role updated successfully!');
         // return redirect()->back();
     }
 
@@ -101,7 +101,9 @@ class RollManagementController extends Controller
     {
         $role=Role::findorFail($id);
         $role->delete();
-        return redirect()->route('roll_management.index')->with('error', 'Role deleted successfully!');
+        return redirect()->route('roll_management.index')->with('success', 'Role deleted successfully!');
         // return redirect()->back();
+  
+
     }
 }
