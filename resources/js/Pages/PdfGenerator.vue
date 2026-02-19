@@ -16,9 +16,16 @@ export default {
     methods: {
         async generatePdf() {
             const response = await fetch('/pdf_generate', {
-                method: 'Get',
-         
-                body: JSON.stringify({ data: this.pdfData })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document
+                        .querySelector('meta[name="csrf-token"]')
+                        .getAttribute('content')
+                },
+                body: JSON.stringify({
+                    data: this.pdfData
+                })
             });
 
             if (response.ok) {
@@ -26,7 +33,7 @@ export default {
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = 'document.pdf';
+                a.download = 'shops.pdf';
                 document.body.appendChild(a);
                 a.click();
                 a.remove();

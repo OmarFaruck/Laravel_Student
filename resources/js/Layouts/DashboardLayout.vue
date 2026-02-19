@@ -40,6 +40,18 @@
            RoleManagement Page
           </Link>
         </li>
+        
+        <!-- <li>
+          <Link href="/pdf_generate" class="nav-link text-white" target="_blank">
+           Print Page
+          </Link>
+        </li> -->
+
+        <li>
+          <a href="/pdf_generate" class="nav-link text-white" target="_blank">
+           Print Page
+          </a>
+        </li>
 
         <li>
           <Link href="/register_page" class="nav-link text-white">
