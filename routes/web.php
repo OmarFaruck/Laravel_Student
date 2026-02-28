@@ -8,6 +8,7 @@ use App\Http\Controllers\User\AdminController;
 use App\Http\Controllers\User\CustomersController;
 use App\Http\Controllers\User\MyCustomerController;
 use App\Http\Controllers\User\PdfController;
+use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\ShopController;
 use App\Models\Shop;
 use Illuminate\Support\Facades\Route;
@@ -68,6 +69,13 @@ Route::delete('/admins/{id}', [AdminController::class, 'destroy'])->name('admins
 // Route::get('/rollmanagement', [RollManagementController::class, 'rollmanagement'])->name('roll_management.index');
 // Route::get('/rollmanagement/create', [RollManagementController::class, 'create'])->name('roll_management.create');
 // Route::post('/rollmanagement', [RollManagementController::class, 'store'])->name('roll_management.store');
+
+Route::get('/products', [ProductController::class, 'product'])->name('product.index');
+Route::post('/products', [ProductController::class, 'store'])->name('product.store');
+Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
+Route::put('/products/{product}', [ProductController::class, 'update'])->name('product.update');
+Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+
 
 Route::get('/rollmanagement', [RollManagementController::class, 'rollmanagement'])->name('roll_management.index');
 Route::post('/rollmanagement', [RollManagementController::class, 'store'])->name('roll_management.store');

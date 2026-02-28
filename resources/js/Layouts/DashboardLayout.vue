@@ -41,6 +41,12 @@
           </Link>
         </li>
         
+        <li>
+          <Link href="/products" class="nav-link text-white">
+           Product Page
+          </Link>
+        </li>
+        
         <!-- <li>
           <Link href="/pdf_generate" class="nav-link text-white" target="_blank">
            Print Page
